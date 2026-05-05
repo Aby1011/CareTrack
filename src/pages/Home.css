@@ -1,0 +1,243 @@
+/* Home.css - Premium Styles for CareTrack */
+
+:root {
+  --primary: #000000;
+  --secondary: #4a4a4a;
+  --accent: #0d9488;
+  --bg-bright: #ffffff;
+  --bg-soft: #f9f9fb;
+}
+
+/* Theater/Curved Screen Effect */
+.theater-container {
+  perspective: 1200px;
+  overflow: visible;
+}
+
+.theater-screen {
+  transform-style: preserve-3d;
+  transform: rotateX(5deg) rotateY(0deg);
+  transition: transform 0.5s ease-out;
+  width: 100%;
+  max-width: 1400px;
+  background: rgba(255, 255, 255, 0.01);
+  border-radius: 40px;
+  padding: 80px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.1);
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+/* Card Fan Effect */
+.card-fan-section {
+  height: 200vh;
+  /* Scroll length for the fan effect */
+  position: relative;
+  overflow: visible;
+}
+
+.card-fan-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.card-fan-item {
+  position: absolute;
+  width: 320px;
+  height: 480px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  transform-origin: bottom center;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  transition: box-shadow 0.3s ease;
+}
+
+.card-fan-item:hover {
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.1);
+}
+
+.card-fan-item img {
+  transform: scale(1.1);
+}
+
+.card-fan-item:hover img {
+  transform: scale(1);
+  filter: grayscale(0);
+}
+
+/* Pinned Horizontal Scroll */
+.horizontal-scroll-container {
+  overflow: hidden;
+  background: var(--bg-soft);
+}
+
+.horizontal-scroll-wrapper {
+  display: flex;
+  width: 400vw;
+  /* Total width for horizontal scrolling */
+  height: 100vh;
+}
+
+.horizontal-scroll-item {
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5vw;
+}
+
+.hero-background-layer {
+  transform-style: preserve-3d;
+  z-index: 1;
+  transform: scale(1.1);
+  will-change: transform;
+}
+
+.hero-background-layer img {
+  filter: saturate(1) brightness(1);
+}
+
+.hero-image-wrapper {
+  aspect-ratio: 4/5;
+  width: 100%;
+  max-width: 450px;
+  margin-left: auto;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 3s infinite ease-in-out;
+}
+
+/* Utilities */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.nav-link {
+  position: relative;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: black;
+  transition: width 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.pill-button {
+  padding: 12px 30px;
+  border-radius: 500px;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.pill-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.pill-button-primary {
+  background: black;
+  color: white;
+}
+
+.pill-button-secondary {
+  background: white;
+  color: black;
+}
+
+/* Mask Reveal Hover */
+.mask-reveal {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: #f9f9fb;
+  transition: all 0.4s ease;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mask-overlay {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(0);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mask-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.mask-reveal:hover .mask-overlay {
+  transform: scale(3);
+}
+
+.mask-reveal:hover {
+  color: white;
+  border-color: transparent;
+  transform: translateY(-5px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+}
+
+/* Animations */
+
+@media (max-width: 768px) {
+  .card-fan-item {
+    width: 250px;
+    height: 350px;
+  }
+}
