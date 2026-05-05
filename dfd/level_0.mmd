@@ -1,0 +1,14 @@
+flowchart TD
+    classDef process fill:#fff,stroke:#000,stroke-width:1px,rx:50,ry:50;
+    classDef entity fill:#fff,stroke:#000,stroke-width:1px;
+
+    PATIENT[PATIENT]:::entity
+    ADMIN[ADMIN]:::entity
+    DOCTOR[DOCTOR]:::entity
+    NURSE[NURSE]:::entity
+    CARETRACK([CARETRACK SYSTEM]):::process
+
+    PATIENT <-->|"Request / Data"| CARETRACK
+    ADMIN <-->|"Manage / Monitor"| CARETRACK
+    CARETRACK <-->|"Patient Data / Alerts"| DOCTOR
+    CARETRACK <-->|"Tasks / Status"| NURSE

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CareTrack Database Schema</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; color: #333; }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #34495e; padding-bottom: 10px; }
+        h2 { color: #2980b9; margin-top: 30px; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f8f9fa; color: #2c3e50; font-weight: bold; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .pk { color: #c0392b; font-weight: bold; }
+        .fk { color: #27ae60; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>CareTrack Database Schema</h1>
+
+    <h2>1. User (Custom User Model)</h2>
+    <p>Extends standard Django AbstractUser. Handles authentication and role-based access.</p>
+    <table>
+        <tr><th>Field Name</th><th>Data Type</th><th>Key</th><th>Description</th></tr>
+        <tr><td>id</td><td>Auto Increment INT</td><td><span class="pk">PK</span></td><td>Unique identifier for the user.</td></tr>
+        <tr><td>username</td><td>VARCHAR(150)</td><td>Unique</td><td>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</td></tr>
+        <tr><td>password</td><td>VARCHAR(128)</td><td></td><td>Hashed password.</td></tr>
+        <tr><td>email</td><td>VARCHAR(254)</td><td></td><td>User's email address.</td></tr>
+        <tr><td>first_name</td><td>VARCHAR(150)</td><td></td><td>User's first name.</td></tr>
+        <tr><td>last_name</td><td>VARCHAR(150)</td><td></td><td>User's last name.</td></tr>
+        <tr><td>role</td><td>VARCHAR(10)</td><td></td><td>User role (Admin, Doctor, Nurse, Patient). Default: Patient.</td></tr>
+        <tr><td>phone_number</td><td>VARCHAR(15)</td><td></td><td>User's contact number.</td></tr>
+        <tr><td>is_approved</td><td>BOOLEAN</td><td></td><td>Indicates if the user account is approved by admin. Default: False.</td></tr>
+        <tr><td>requires_password_change</td><td>BOOLEAN</td><td></td><td>Flags if user needs to change password on next login. Default: False.</td></tr>
+        <tr><td>is_active</td><td>BOOLEAN</td><td></td><td>Designates whether this user should be treated as active.</td></tr>
+        <tr><td>is_staff</td><td>BOOLEAN</td><td></td><td>Designates whether the user can log into the admin site.</td></tr>
+        <tr><td>date_joined</td><td>DATETIME</td><td></td><td>Date the account was created.</td></tr>
+    </table>
+
+    <h2>2. DoctorProfile</h2>
+    <p>Stores additional information specific to doctors.</p>
+    <table>
+        <tr><th>Field Name</th><th>Data Type</th><th>Key</th><th>Description</th></tr>
+        <tr><td>id</td><td>Auto Increment INT</td><td><span class="pk">PK</span></td><td>Unique identifier.</td></tr>
+        <tr><td>user_id</td><td>INT</td><td><span class="fk">FK</span></td><td>One-to-One link to User table. Deletes profile if User is deleted.</td></tr>
+        <tr><td>specialization</td><td>VARCHAR(100)</td><td></td><td>Doctor's medical specialty.</td></tr>
+        <tr><td>license_number</td><td>VARCHAR(50)</td><td></td><td>Doctor's medical license number.</td></tr>
+        <tr><td>hospital_clinic_name</td><td>VARCHAR(255)</td><td></td><td>Name of the affiliated hospital or clinic.</td></tr>
+    </table>
+
+    <h2>3. NurseProfile</h2>
+    <p>Stores additional information specific to nurses.</p>
+    <table>
+        <tr><th>Field Name</th><th>Data Type</th><th>Key</th><th>Description</th></tr>
+        <tr><td>id</td><td>Auto Increment INT</td><td><span class="pk">PK</span></td><td>Unique identifier.</td></tr>
+        <tr><td>user_id</td><td>INT</td><td><span class="fk">FK</span></td><td>One-to-One link to User table. Deletes profile if User is deleted.</td></tr>
+        <tr><td>department</td><td>VARCHAR(100)</td><td></td><td>Hospital department the nurse is assigned to.</td></tr>
+        <tr><td>qualification</td><td>VARCHAR(100)</td><td></td><td>Nurse's medical qualification.</td></tr>
+        <tr><td>employee_id</td><td>VARCHAR(50)</td><td></td><td>Internal employee identification number.</td></tr>
+    </table>
+
+    <h2>4. PatientProfile</h2>
+    <p>Stores demographic and basic medical information for patients.</p>
+    <table>
+        <tr><th>Field Name</th><th>Data Type</th><th>Key</th><th>Description</th></tr>
+        <tr><td>id</td><td>Auto Increment INT</td><td><span class="pk">PK</span></td><td>Unique identifier.</td></tr>
+        <tr><td>user_id</td><td>INT</td><td><span class="fk">FK</span></td><td>One-to-One link to User table. Deletes profile if User is deleted.</td></tr>
+        <tr><td>date_of_birth</td><td>DATE</td><td></td><td>Patient's date of birth.</td></tr>
+        <tr><td>age</td><td>INT</td><td></td><td>Patient's age.</td></tr>
+        <tr><td>gender</td><td>VARCHAR(10)</td><td></td><td>Patient's gender.</td></tr>
+        <tr><td>address</td><td>TEXT</td><td></td><td>Patient's residential address.</td></tr>
+        <tr><td>contact_number</td><td>VARCHAR(15)</td><td></td><td>Primary contact number.</td></tr>
+        <tr><td>emergency_contact</td><td>VARCHAR(15)</td><td></td><td>Emergency contact number.</td></tr>
+        <tr><td>assigned_doctor_id</td><td>INT</td><td><span class="fk">FK</span></td><td>Link to User table (Doctor). Can be null. Sets to NULL on deletion.</td></tr>
+        <tr><td>basic_health_issue</td><td>TEXT</td><td></td><td>Description of primary health issues.</td></tr>
+        <tr><td>treatment_details</td><td>TEXT</td><td></td><td>Current or past treatment information.</td></tr>
+    </table>
+
+    <h2>5. FollowUpPlan</h2>
+    <p>Defines the scheduled follow-up routines for a patient.</p>
+    <table>
+        <tr><th>Field Name</th><th>Data Type</th><th>Key</th><th>Description</th></tr>
+        <tr><td>id</td><td>Auto Increment INT</td><td><span class="pk">PK</span></td><td>Unique identifier.</td></tr>
+        <tr><td>patient_id</td><td>INT</td><td><span class="fk">FK</span></td><td>One-to-One link to PatientProfile. Deletes plan if Patient is deleted.</td></tr>
+        <tr><td>start_date</td><td>DATE</td><td></td><td>Date the follow-up plan started. Auto set on creation.</td></tr>
+        <tr><td>duration_days</td><td>INT</td><td></td><td>Duration of the follow-up plan in days. Default: 30.</td></tr>
+        <tr><td>check_in_frequency</td><td>VARCHAR(50)</td><td></td><td>How often the patient should check in (e.g., 'Daily'). Default: 'Daily'.</td></tr>
+        <tr><td>is_active</td><td>BOOLEAN</td><td></td><td>Whether the plan is currently active. Default: True.</td></tr>
+    </table>
+
+    <h2>6. DailyCheckIn</h2>
+    <p>Records the daily health vitals submitted by patients.</p>
+    <table>
+        <tr><th>Field Name</th><th>Data Type</th><th>Key</th><th>Description</th></tr>
+        <tr><td>id</td><td>Auto Increment INT</td><td><span class="pk">PK</span></td><td>Unique identifier.</td></tr>
+        <tr><td>patient_id</td><td>INT</td><td><span class="fk">FK</span></td><td>Link to PatientProfile.</td></tr>
+        <tr><td>date</td><td>DATE</td><td></td><td>Date of the check-in. Auto set on creation.</td></tr>
+        <tr><td>blood_pressure_systolic</td><td>INT</td><td></td><td>Systolic blood pressure reading.</td></tr>
+        <tr><td>blood_pressure_diastolic</td><td>INT</td><td></td><td>Diastolic blood pressure reading.</td></tr>
+        <tr><td>blood_sugar</td><td>DECIMAL(5,2)</td><td></td><td>Blood sugar level.</td></tr>
+        <tr><td>pulse</td><td>INT</td><td></td><td>Heart rate/pulse.</td></tr>
+        <tr><td>pain_level</td><td>INT</td><td></td><td>Pain level scale (1-10).</td></tr>
+        <tr><td>symptoms</td><td>TEXT</td><td></td><td>Any subjective symptoms reported by the patient.</td></tr>
+        <tr><td>created_at</td><td>DATETIME</td><td></td><td>Timestamp when the record was created.</td></tr>
+    </table>
+
+    <h2>7. Alert</h2>
+    <p>System-generated or manual alerts based on critical patient check-ins.</p>
+    <table>
+        <tr><th>Field Name</th><th>Data Type</th><th>Key</th><th>Description</th></tr>
+        <tr><td>id</td><td>Auto Increment INT</td><td><span class="pk">PK</span></td><td>Unique identifier.</td></tr>
+        <tr><td>daily_checkin_id</td><td>INT</td><td><span class="fk">FK</span></td><td>Link to the DailyCheckIn that triggered the alert.</td></tr>
+        <tr><td>severity</td><td>VARCHAR(10)</td><td></td><td>Severity level: Low, Medium, High.</td></tr>
+        <tr><td>reason</td><td>VARCHAR(255)</td><td></td><td>Reason for the alert (e.g., High Blood Pressure).</td></tr>
+        <tr><td>status</td><td>VARCHAR(15)</td><td></td><td>Status: New, In Progress, Resolved. Default: New.</td></tr>
+        <tr><td>created_at</td><td>DATETIME</td><td></td><td>Timestamp when the alert was created.</td></tr>
+        <tr><td>handled_by_id</td><td>INT</td><td><span class="fk">FK</span></td><td>Link to User (Doctor/Nurse) handling the alert. Set to NULL if deleted.</td></tr>
+    </table>
+
+    <h2>8. Message</h2>
+    <p>Internal communication messages between users (Doctor <-> Patient, Nurse <-> Doctor).</p>
+    <table>
+        <tr><th>Field Name</th><th>Data Type</th><th>Key</th><th>Description</th></tr>
+        <tr><td>id</td><td>Auto Increment INT</td><td><span class="pk">PK</span></td><td>Unique identifier.</td></tr>
+        <tr><td>sender_id</td><td>INT</td><td><span class="fk">FK</span></td><td>Link to User sending the message.</td></tr>
+        <tr><td>receiver_id</td><td>INT</td><td><span class="fk">FK</span></td><td>Link to User receiving the message.</td></tr>
+        <tr><td>content</td><td>TEXT</td><td></td><td>Body of the message.</td></tr>
+        <tr><td>timestamp</td><td>DATETIME</td><td></td><td>Timestamp when the message was sent.</td></tr>
+        <tr><td>is_read</td><td>BOOLEAN</td><td></td><td>Whether the message has been read by the receiver. Default: False.</td></tr>
+    </table>
+
+</body>
+</html>

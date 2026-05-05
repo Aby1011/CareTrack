@@ -1,0 +1,25 @@
+flowchart LR
+    classDef process fill:#fff,stroke:#000,stroke-width:1px;
+    classDef ellipse fill:#fff,stroke:#000,stroke-width:1px,rx:50,ry:50;
+    classDef ds fill:#fff,stroke:#000,stroke-width:1px;
+
+    ADMIN[ADMIN]:::process
+    
+    A1([2.0<br/>Login]):::ellipse
+    A2([2.1<br/>Approve Users]):::ellipse
+    A3([2.2<br/>Manage Staff]):::ellipse
+    A4([2.3<br/>System Reports]):::ellipse
+    
+    D1[(User)]:::ds
+    D2[(DoctorProfile / NurseProfile)]:::ds
+    D3[(DailyCheckIn / Alert)]:::ds
+    
+    ADMIN --> A1
+    ADMIN --> A2
+    ADMIN --> A3
+    ADMIN --> A4
+    
+    A1 <--> D1
+    A2 <--> D1
+    A3 <--> D2
+    A4 <--> D3

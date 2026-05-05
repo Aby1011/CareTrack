@@ -1,0 +1,28 @@
+flowchart LR
+    classDef process fill:#fff,stroke:#000,stroke-width:1px;
+    classDef ellipse fill:#fff,stroke:#000,stroke-width:1px,rx:50,ry:50;
+    classDef ds fill:#fff,stroke:#000,stroke-width:1px;
+
+    NURSE[NURSE]:::process
+    
+    N1([4.0<br/>Login]):::ellipse
+    N2([4.1<br/>Monitor Patients]):::ellipse
+    N3([4.2<br/>Handle Criticals]):::ellipse
+    N4([4.3<br/>Messages]):::ellipse
+    
+    DB1[(User)]:::ds
+    DB2[(PatientProfile)]:::ds
+    DB3[(DailyCheckIn)]:::ds
+    DB4[(Alert)]:::ds
+    DB5[(Message)]:::ds
+    
+    NURSE --> N1
+    NURSE --> N2
+    NURSE --> N3
+    NURSE --> N4
+    
+    N1 <--> DB1
+    N2 <--> DB2
+    N2 <--> DB3
+    N3 <--> DB4
+    N4 <--> DB5
