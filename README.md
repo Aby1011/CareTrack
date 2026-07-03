@@ -1,6 +1,9 @@
 # 🏥 CareTrack
 **CareTrack** is a web-based **Remote Patient Follow-Up and Nurse Management System** designed to improve post-treatment healthcare management. It enables doctors, nurses, and patients to stay connected through an interactive, centralized platform, simplifying patient monitoring, follow-up planning, digital prescription management, and emergency alert handling.
 Developed as an academic project for the Master of Computer Applications (MCA) curriculum.
+
+> 🌐 Live Demo: https://care-track-tau.vercel.app/
+
 ---
 ## 📖 Overview
 Many hospitals and clinics rely on manual methods for patient follow-up, resulting in missed appointments, delayed interventions, and inefficient communication. CareTrack addresses these challenges by providing a secure and centralized platform where healthcare professionals can remotely monitor patients and respond quickly to abnormal health conditions.
@@ -148,75 +151,15 @@ npm run dev
 ## 🛡️ Simulation & Testing Credentials
 Since the system uses local storage and pre-seeded mock data, you can test all roles immediately using these pre-registered accounts:
 |
- Role 
-|
- Email 
-|
- Password 
-|
- Details 
-|
-|
-:---
-|
-:---
-|
-:---
-|
-:---
-|
-|
-**
-Admin
-**
-|
-`admin@system.com`
-|
-*
-Any password
-*
-|
- Dr. Sarah Johnson 
-|
-|
-**
-Doctor
-**
-|
-`dr.chen@system.com`
-|
-*
-Any password
-*
-|
- Dr. Michael Chen (Cardiology) 
-|
-|
-**
-Nurse
-**
-|
-`nurse.brown@system.com`
-|
-*
-Any password
-*
-|
- Nurse Jessica Brown 
-|
-|
-**
-Patient
-**
-|
-`john.smith.p101@email.com`
-|
-*
-Any password
-*
-|
- John Smith (Post-Cardiac Surgery) 
-|
+## Demo Credentials
+
+| Role | Email | Password |
+|---|---|---|
+| Admin | `admin@system.com` | `password123` *(or any password if configured)* |
+| Doctor | `dr.chen@system.com` | `password123` *(or any password if configured)* |
+| Nurse | `nurse.brown@system.com` | `password123` *(or any password if configured)* |
+| Patient | `john.smith.p101@email.com` | `password123` *(or any password if configured)* |
+
 *Note: For ease of testing in the development/demo environment, any password will be accepted for the pre-seeded accounts.*
 ---
 ## 👨‍💻 Developer
