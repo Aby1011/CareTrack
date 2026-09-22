@@ -821,7 +821,6 @@ export const loadUsers = () => {
 
     // Ensure all required arrays exist and include demo users
     return {
-      admin: parsed.admin || initialUsers.admin,
       doctors: [...initialUsers.doctors, ...(parsed.doctors || []).filter(d => !initialUsers.doctors.find(id => id.id === d.id))],
       nurses: [...initialUsers.nurses, ...(parsed.nurses || []).filter(n => !initialUsers.nurses.find(inr => inr.id === n.id))],
       patients: [...initialUsers.patients, ...(parsed.patients || []).filter(p => !initialUsers.patients.find(ip => ip.id === p.id))]
